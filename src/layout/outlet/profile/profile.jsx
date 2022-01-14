@@ -2,7 +2,7 @@
 
 let Profile = () => {
     return (
-        "kakame"
+        "profile"
     );
 }
 

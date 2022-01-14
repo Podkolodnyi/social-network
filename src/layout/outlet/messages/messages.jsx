@@ -2,7 +2,7 @@
 
 let Messages = () => {
     return (
-        "kakauf"
+        "messages"
     );
 }
 

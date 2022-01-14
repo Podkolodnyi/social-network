@@ -1,0 +1,23 @@
+.container {
+    display: grid;
+    gap: 10px;
+    grid-template: 50px 95% / 250px 1fr;
+    grid-template-areas:
+    "header header"
+    "sidebar main";
+}
+
+.header {
+    grid-area: header;
+    border: 1px solid black;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    border: 1px solid black;
+}
+
+.main {
+    grid-area: main;
+    border: 1px solid black;
+}
