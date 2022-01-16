@@ -1,0 +1,7 @@
+.container {
+    display: flex;
+}
+
+.dialog {
+    flex: 0 0 200px;
+}

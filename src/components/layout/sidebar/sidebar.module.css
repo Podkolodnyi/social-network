@@ -1,0 +1,17 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+
+.activeLink {
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}

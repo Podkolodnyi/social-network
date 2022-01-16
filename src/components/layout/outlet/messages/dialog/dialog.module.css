@@ -1,0 +1,12 @@
+.link {
+    text-decoration: none;
+    color: black;
+}
+.activeLink {
+    text-decoration: none;
+    color: black;
+}
+
+.container {
+    padding: 10px;
+}
