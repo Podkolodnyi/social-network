@@ -1,34 +1,41 @@
-import classes from "./posts.module.css"
+import classes from "./posts.module.css";
 import Post from "./post/post";
 import React from "react";
 
-
 const Posts = (props) => {
+  let newPost = props.posts.map((elem) => (
+    <Post
+      key={elem.id}
+      name={elem.name}
+      text={elem.text}
+      id={elem.id}
+      likes={elem.likes}
+    />
+  ));
 
-    let newPost = props.posts.map(elem => <Post name = {elem.name} text = {elem.text} id = {elem.id} likes = {elem.likes}/>)
+  let postText = React.createRef();
 
-    let postText = React.createRef();
+  let onChangeText = () => {
+    props.dispatch({ type: "CHANGE_POST_TEXT", text: postText.current.value });
+  };
 
-    let onChangeText = () => {
-        let text = postText.current.value;
-        props.changePostText(text);
-    }
+  let onClickButton = () => {
+    props.dispatch({ type: "ADD_NEW_POST" });
+  };
 
-    let onClickButton = () => {
-        let text = props.inputPostText;
-        props.addNewPost(text);
-        postText.current.value = "";
-    }
-
-    return (
-        <div className={classes.posts}>
-        <input ref={postText} onChange={onChangeText}/>
-        <button onClick={onClickButton} className={classes.addPostButton}>add post</button>
-            <div className={classes.post}>
-                {newPost}
-            </div>
-        </div>
-    );
-}
+  return (
+    <div className={classes.posts}>
+      <input
+        ref={postText}
+        onChange={onChangeText}
+        value={props.inputPostText}
+      />
+      <button onClick={onClickButton} className={classes.addPostButton}>
+        add post
+      </button>
+      <div className={classes.post}>{newPost}</div>
+    </div>
+  );
+};
 
 export default Posts;

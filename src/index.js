@@ -3,23 +3,21 @@ import ReactDOM from "react-dom";
 import classes from "./index.module.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {BrowserRouter} from "react-router-dom";
-import state from "./components/state/state";
-import {subscribe, addNewPost, changePostText} from "./components/state/state";
-
+import { BrowserRouter } from "react-router-dom";
+import store from "./components/state/state";
 
 const rerederAll = () => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <BrowserRouter>
-                <App state={state} changePostText={changePostText} addNewPost={addNewPost}/>
-            </BrowserRouter>
-        </React.StrictMode>,
-        document.getElementById('root')
-    );
-}
+  ReactDOM.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
+      </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
+};
 
-subscribe(rerederAll);
+store.subscribe(rerederAll);
 
 rerederAll();
 
