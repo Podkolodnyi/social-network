@@ -5,7 +5,7 @@ import React from "react";
 import {
   addNewMessageActionCreator,
   changeMessageTextActionCreator,
-} from "../../../state/state";
+} from "../../../redux/messages-reducer";
 
 let Messages = (props) => {
   let messageText = React.createRef();
