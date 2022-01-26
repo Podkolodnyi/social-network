@@ -1,4 +1,4 @@
-import Posts from "./posts/posts";
+import { PostsContainer } from "./posts/postsContainer";
 import classes from "./profile.module.css";
 
 const Profile = (props) => {
@@ -12,11 +12,7 @@ const Profile = (props) => {
       </div>
       <div className={classes.userPage}>"Hello"</div>
       <div className={classes.posts}>
-        <Posts
-          posts={props.profilePage.posts}
-          inputPostText={props.profilePage.inputPostText}
-          dispatch={props.dispatch}
-        />
+        <PostsContainer />
       </div>
     </div>
   );

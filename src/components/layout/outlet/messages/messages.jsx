@@ -2,20 +2,16 @@ import classes from "./messages.module.css";
 import Dialog from "./dialog/dialog";
 import Message from "./message/message";
 import React from "react";
-import {
-  addNewMessageActionCreator,
-  changeMessageTextActionCreator,
-} from "../../../redux/messages-reducer";
 
 let Messages = (props) => {
   let messageText = React.createRef();
 
   let onChangeText = () => {
-    props.dispatch(changeMessageTextActionCreator(messageText.current.value));
+    props.onChangeText(messageText.current.value);
   };
 
   let onClickButton = () => {
-    props.dispatch(addNewMessageActionCreator());
+    props.onClickButton();
   };
 
   return (

@@ -16,19 +16,20 @@ let initialState = {
 const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_MESSAGE_TEXT:
-      state.inputMessageText = action.text;
-      return state;
+      return { ...state, inputMessageText: action.text };
     case ADD_NEW_MESSAGE:
-      state.messages.push({
-        id: state.messages.length + 1,
-        message: state.inputMessageText,
-      });
-      state.dialogs.push({
-        id: state.dialogs.length + 1,
-        name: "augustin",
-      });
-      state.inputMessageText = "";
-      return state;
+      return {
+        ...state,
+        messages: [
+          ...state.messages,
+          { id: state.messages.length + 1, message: state.inputMessageText },
+        ],
+        dialogs: [
+          ...state.dialogs,
+          { id: state.dialogs.length + 1, name: "augustin" },
+        ],
+        inputMessageText: "",
+      };
     default:
       return state;
   }
