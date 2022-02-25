@@ -1,14 +1,14 @@
-import Header from "./header/header";
 import Sidebar from "./sidebar/sidebar";
 import { Outlet } from "react-router-dom";
 import classes from "./layout.module.css";
 import Footer from "./footer/footer";
+import HeaderContainer from "./header/header-container";
 
 let Layout = () => {
   return (
     <div className={classes.container}>
       <div className={classes.header}>
-        <Header />
+        <HeaderContainer />
       </div>
       <div className={classes.sidebar}>
         <Sidebar />

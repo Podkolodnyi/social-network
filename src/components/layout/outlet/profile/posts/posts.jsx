@@ -3,24 +3,14 @@ import Post from "./post/post";
 import React from "react";
 
 const Posts = (props) => {
-  let newPost = props.posts.map((elem) => (
-    <Post
-      key={elem.id}
-      name={elem.name}
-      text={elem.text}
-      id={elem.id}
-      likes={elem.likes}
-    />
-  ));
-
   let postText = React.createRef();
 
   let onChangeText = () => {
-    props.onChangeText(postText.current.value);
+    props.changePostText(postText.current.value);
   };
 
   let onClickButton = () => {
-    props.onClickButton();
+    props.addNewPost();
   };
 
   return (
@@ -33,7 +23,17 @@ const Posts = (props) => {
       <button onClick={onClickButton} className={classes.addPostButton}>
         add post
       </button>
-      <div className={classes.post}>{newPost}</div>
+      <div className={classes.post}>
+        {props.posts.map((elem) => (
+          <Post
+            key={elem.id}
+            name={elem.name}
+            text={elem.text}
+            id={elem.id}
+            likes={elem.likes}
+          />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,19 +1,18 @@
-import classes from "./App.module.css";
 import { Routes, Route } from "react-router-dom";
-import { MessagesContainer } from "./components/layout/outlet/messages/messagesContainer";
+import { MessagesContainer } from "./components/layout/outlet/messages/messages-container";
 import Layout from "./components/layout/layout";
-import Profile from "./components/layout/outlet/profile/profile";
-
-/*        {props.state.messagesPage.dialogs.map((elem) => (
-          <Route key={elem.id} path={`/messages/${elem.id}`} />
-        ))}*/
+import UsersContainer from "./components/layout/outlet/users/users-container";
+import { ProfileConnect } from "./components/layout/outlet/profile/profile-container";
 
 let App = (props) => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="/messages" element={<MessagesContainer />} />
-        <Route index element={<Profile />} />
+        <Route path="/profile" element={<ProfileConnect />}>
+          <Route path=":id" element={<ProfileConnect />} />
+        </Route>
+        <Route path="/users" element={<UsersContainer />} />
       </Route>
     </Routes>
   );
