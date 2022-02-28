@@ -5,23 +5,22 @@ import {
   setTotalPageCount,
   setCurrentPage,
   toggleIsLoading,
-} from "../../../redux/users-reducer";
+} from "../../../../redux/users-reducer";
 import { connect } from "react-redux";
 import Users from "./users";
 import React from "react";
 import axios from "axios";
 import Preloader from "../../../common/preloader";
+import { usersAPI } from "../../../../api/api";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
     this.props.toggleIsLoading(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.setTotalPageCount(response.data.totalCount);
+    usersAPI
+      .getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
+        this.props.setUsers(data.items);
+        this.props.setTotalPageCount(data.totalCount);
         this.props.toggleIsLoading(false);
       });
   }
@@ -29,14 +28,10 @@ class UsersContainer extends React.Component {
   onPageChanged = (currentPage) => {
     this.props.setCurrentPage(currentPage);
     this.props.toggleIsLoading(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.toggleIsLoading(false);
-      });
+    usersAPI.getUsers(currentPage, this.props.pageSize).then((data) => {
+      this.props.setUsers(data.items);
+      this.props.toggleIsLoading(false);
+    });
   };
 
   render() {

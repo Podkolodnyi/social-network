@@ -1,5 +1,6 @@
 import classes from "./users.module.css";
 import { NavLink } from "react-router-dom";
+import { usersAPI } from "../../../../api/api";
 
 let Users = (props) => {
   let Pages = [];
@@ -47,7 +48,11 @@ let Users = (props) => {
               {elem.followed === true ? (
                 <button
                   onClick={() => {
-                    props.unfollow(elem.id);
+                    usersAPI.unfollow(elem.id).then((data) => {
+                      if (data.resultCode === 0) {
+                        props.unfollow(elem.id);
+                      }
+                    });
                   }}
                 >
                   unfollow
@@ -55,7 +60,11 @@ let Users = (props) => {
               ) : (
                 <button
                   onClick={() => {
-                    props.follow(elem.id);
+                    usersAPI.follow(elem.id).then((data) => {
+                      if (data.resultCode === 0) {
+                        props.follow(elem.id);
+                      }
+                    });
                   }}
                 >
                   follow

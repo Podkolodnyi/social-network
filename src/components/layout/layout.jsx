@@ -1,8 +1,8 @@
-import Sidebar from "./sidebar/sidebar";
 import { Outlet } from "react-router-dom";
 import classes from "./layout.module.css";
 import Footer from "./footer/footer";
 import HeaderContainer from "./header/header-container";
+import SidebarContainer from "./sidebar/sidebar-container";
 
 let Layout = () => {
   return (
@@ -11,7 +11,7 @@ let Layout = () => {
         <HeaderContainer />
       </div>
       <div className={classes.sidebar}>
-        <Sidebar />
+        <SidebarContainer />
       </div>
       <main className={classes.main}>
         <Outlet />
