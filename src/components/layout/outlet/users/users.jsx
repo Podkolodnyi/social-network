@@ -1,6 +1,5 @@
 import classes from "./users.module.css";
 import { NavLink } from "react-router-dom";
-import { usersAPI } from "../../../../api/api";
 
 let Users = (props) => {
   let Pages = [];
@@ -47,24 +46,22 @@ let Users = (props) => {
             <div className={classes.follow}>
               {elem.followed === true ? (
                 <button
+                  disabled={props.followingInProgress.some(
+                    (id) => id === elem.id
+                  )}
                   onClick={() => {
-                    usersAPI.unfollow(elem.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        props.unfollow(elem.id);
-                      }
-                    });
+                    props.unfollow(elem.id);
                   }}
                 >
                   unfollow
                 </button>
               ) : (
                 <button
+                  disabled={props.followingInProgress.some(
+                    (id) => id === elem.id
+                  )}
                   onClick={() => {
-                    usersAPI.follow(elem.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        props.follow(elem.id);
-                      }
-                    });
+                    props.follow(elem.id);
                   }}
                 >
                   follow
