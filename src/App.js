@@ -3,6 +3,7 @@ import { MessagesContainer } from "./components/layout/outlet/messages/messages-
 import Layout from "./components/layout/layout";
 import UsersContainer from "./components/layout/outlet/users/users-container";
 import { ProfileConnect } from "./components/layout/outlet/profile/profile-container";
+import Login from "./components/layout/outlet/login/login";
 
 let App = (props) => {
   return (
@@ -13,6 +14,7 @@ let App = (props) => {
           <Route path=":id" element={<ProfileConnect />} />
         </Route>
         <Route path="/users" element={<UsersContainer />} />
+        <Route path="/login" element={<Login />} />
       </Route>
     </Routes>
   );

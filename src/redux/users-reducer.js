@@ -73,23 +73,23 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 
-export const setUsers = (users) => ({ type: SET_USERS, users });
-export const followAccept = (userId) => ({ type: FOLLOW, userId });
-export const unfollowAccept = (userId) => ({ type: UNFOLLOW, userId });
-export const toggleIsLoading = (toggleIsLoading) => ({
+const setUsers = (users) => ({ type: SET_USERS, users });
+const followAccept = (userId) => ({ type: FOLLOW, userId });
+const unfollowAccept = (userId) => ({ type: UNFOLLOW, userId });
+const toggleIsLoading = (toggleIsLoading) => ({
   type: TOGGLE_IS_LOADING,
   toggleIsLoading,
 });
-export const toggleFollowingInProgress = (isInProgress, userId) => ({
+const toggleFollowingInProgress = (isInProgress, userId) => ({
   type: TOGGLE_FOLLOWING_IN_PROGRESS,
   isInProgress,
   userId,
 });
-export const setTotalPageCount = (totalPageCount) => ({
+const setTotalPageCount = (totalPageCount) => ({
   type: SET_TOTAL_PAGE_COUNT,
   totalPageCount,
 });
-export const setCurrentPage = (currentPage) => ({
+const setCurrentPage = (currentPage) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
@@ -112,6 +112,26 @@ export const follow = (userId) => {
         dispatch(followAccept(userId));
       }
       dispatch(toggleFollowingInProgress(false, userId));
+    });
+  };
+};
+export const pageChanged = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(setCurrentPage(currentPage));
+    dispatch(toggleIsLoading(true));
+    usersAPI.getUsers(currentPage, pageSize).then((data) => {
+      dispatch(setUsers(data.items));
+      dispatch(toggleIsLoading(false));
+    });
+  };
+};
+export const getUsers = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(toggleIsLoading(true));
+    usersAPI.getUsers(currentPage, pageSize).then((data) => {
+      dispatch(setUsers(data.items));
+      dispatch(setTotalPageCount(data.totalCount));
+      dispatch(toggleIsLoading(false));
     });
   };
 };

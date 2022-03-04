@@ -2,6 +2,7 @@ import classes from "./messages.module.css";
 import Dialog from "./dialog/dialog";
 import Message from "./message/message";
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 let Messages = (props) => {
   let messageText = React.createRef();
@@ -14,6 +15,7 @@ let Messages = (props) => {
     props.onClickButton();
   };
 
+  if (!props.isAuth) return <Navigate to="/login" />;
   return (
     <div className={classes.container}>
       <div className={classes.messages}>
