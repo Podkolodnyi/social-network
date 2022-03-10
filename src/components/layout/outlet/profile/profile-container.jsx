@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import Profile from "./profile";
 import { useParams } from "react-router-dom";
 import { getUserProfile } from "../../../../redux/profile-reducer";
+import { withAuthNavigate } from "../../../../HOC/authNavigate";
+import { compose } from "redux";
 
-class ProfileContainer extends React.Component {
+class ProfileWithUrl extends React.Component {
   componentDidMount() {
     let userId = this.props.userId;
     if (!userId) {
@@ -21,14 +23,14 @@ let mapStateToProps = (state) => ({
   userProfile: state.profilePage.userProfile,
   userId: state.profilePage.userProfileId,
   homeId: state.auth.userId,
-  isAuth: state.auth.isAuth,
 });
 
-const ProfileWithUrl = (props) => {
+const ProfileContainer = (props) => {
   let { id } = useParams();
-  return <ProfileContainer {...props} userId={id} />;
+  return <ProfileWithUrl {...props} userId={id} />;
 };
 
-export const ProfileConnect = connect(mapStateToProps, {
-  getUserProfile,
-})(ProfileWithUrl);
+export default compose(
+  connect(mapStateToProps, { getUserProfile }),
+  withAuthNavigate
+)(ProfileContainer);

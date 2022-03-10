@@ -14,8 +14,6 @@ let Messages = (props) => {
   let onClickButton = () => {
     props.onClickButton();
   };
-
-  if (!props.isAuth) return <Navigate to="/login" />;
   return (
     <div className={classes.container}>
       <div className={classes.messages}>

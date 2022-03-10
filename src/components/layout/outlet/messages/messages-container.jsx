@@ -5,6 +5,8 @@ import {
 } from "../../../../redux/messages-reducer";
 import Messages from "./messages";
 import { connect } from "react-redux";
+import { withAuthNavigate } from "../../../../HOC/authNavigate";
+import { compose } from "redux";
 
 let mapStateToProps = (state) => {
   return {
@@ -24,7 +26,7 @@ let mapDispatchToProps = (dispatch) => {
   };
 };
 
-export const MessagesContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthNavigate
 )(Messages);
