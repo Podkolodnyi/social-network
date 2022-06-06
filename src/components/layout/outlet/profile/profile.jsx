@@ -5,7 +5,11 @@ import UserProfile from "./user-profile/user-profile";
 const Profile = (props) => {
   return (
     <div className={classes.container}>
-      <UserProfile userProfile={props.userProfile} />
+      <UserProfile
+        userProfile={props.userProfile}
+        status={props.status}
+        updateStatus={props.updateStatus}
+      />
       <div className={classes.posts}>
         <PostsContainer />
       </div>
