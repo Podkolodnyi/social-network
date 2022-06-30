@@ -9,7 +9,12 @@ let Header = (props) => {
     <div className={classes.container}>
       <div className={classes.login}>
         {props.isAuth ? (
-          props.login
+          <div>
+            <div>{props.login}</div>
+            <div>
+              <button onClick={props.logout}>log out</button>
+            </div>
+          </div>
         ) : (
           <NavLink to="/login" className={setActive}>
             login

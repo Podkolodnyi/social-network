@@ -3,17 +3,37 @@ import Dialog from "./dialog/dialog";
 import Message from "./message/message";
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
+import { Textarea } from "../../../common/formsControls/formsControls";
+import { maxLengthCreator } from "../../../../utils/validators";
+
+const maxLength100 = maxLengthCreator(100);
+
+const MessageForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field
+          placeholder={"New message"}
+          name={"newMessage"}
+          component={Textarea}
+          validate={maxLength100}
+        />
+      </div>
+      <div>
+        <button>Send</button>
+      </div>
+    </form>
+  );
+};
+
+const MessageReduxForm = reduxForm({ form: "newMessage" })(MessageForm);
 
 let Messages = (props) => {
-  let messageText = React.createRef();
-
-  let onChangeText = () => {
-    props.onChangeText(messageText.current.value);
+  const onSubmit = (values) => {
+    props.addNewMessage(values.newMessage);
   };
 
-  let onClickButton = () => {
-    props.onClickButton();
-  };
   return (
     <div className={classes.container}>
       <div className={classes.messages}>
@@ -29,12 +49,7 @@ let Messages = (props) => {
         </div>
       </div>
       <div className={classes.input}>
-        <input
-          ref={messageText}
-          onChange={onChangeText}
-          value={props.messagesPage.inputMessageText}
-        />
-        <button onClick={onClickButton}>new message</button>
+        <MessageReduxForm onSubmit={onSubmit} />
       </div>
     </div>
   );

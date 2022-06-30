@@ -30,9 +30,25 @@ export const usersAPI = {
     return profileAPI.getProfile(userId);
   },
   authMe() {
+    return authAPI.authMe();
+  },
+};
+
+export const authAPI = {
+  authMe() {
     return instance.get("auth/me").then((response) => {
       return response.data;
     });
+  },
+  login(email, password, rememberMe = false) {
+    return instance.post(`auth/login`, {
+      email,
+      password,
+      rememberMe,
+    });
+  },
+  logout() {
+    return instance.delete(`auth/login`);
   },
 };
 

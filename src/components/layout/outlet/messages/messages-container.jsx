@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  addNewMessageActionCreator,
-  changeMessageTextActionCreator,
-} from "../../../../redux/messages-reducer";
+import { addNewMessage } from "../../../../redux/messages-reducer";
 import Messages from "./messages";
 import { connect } from "react-redux";
 import { withAuthNavigate } from "../../../../HOC/authNavigate";
@@ -17,11 +14,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    onChangeText: (text) => {
-      dispatch(changeMessageTextActionCreator(text));
-    },
-    onClickButton: () => {
-      dispatch(addNewMessageActionCreator());
+    addNewMessage: (text) => {
+      dispatch(addNewMessage(text));
     },
   };
 };

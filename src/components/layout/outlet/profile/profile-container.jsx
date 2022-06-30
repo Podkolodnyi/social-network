@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Profile from "./profile";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import {
   getUserProfile,
   updateStatus,
@@ -15,6 +15,9 @@ class ProfileWithUrl extends React.Component {
     let userId = this.props.userId;
     if (!userId) {
       userId = this.props.homeId;
+      if (!userId) {
+        this.props.history.push("/login");
+      }
     }
     this.props.getUserProfile(userId);
     this.props.getStatus(userId);
@@ -33,9 +36,9 @@ class ProfileWithUrl extends React.Component {
 
 let mapStateToProps = (state) => ({
   userProfile: state.profilePage.userProfile,
-  userId: state.profilePage.userProfileId,
   homeId: state.auth.userId,
   status: state.profilePage.status,
+  isAuth: state.auth.isAuth,
 });
 
 const ProfileContainer = (props) => {
@@ -44,6 +47,9 @@ const ProfileContainer = (props) => {
 };
 
 export default compose(
-  connect(mapStateToProps, { getUserProfile, updateStatus, getStatus }),
-  withAuthNavigate
+  connect(mapStateToProps, {
+    getUserProfile,
+    updateStatus,
+    getStatus,
+  })
 )(ProfileContainer);

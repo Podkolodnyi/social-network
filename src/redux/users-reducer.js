@@ -125,7 +125,7 @@ export const pageChanged = (currentPage, pageSize) => {
     });
   };
 };
-export const getUsers = (currentPage, pageSize) => {
+export const requestUsers = (currentPage, pageSize) => {
   return (dispatch) => {
     dispatch(toggleIsLoading(true));
     usersAPI.getUsers(currentPage, pageSize).then((data) => {
