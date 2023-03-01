@@ -4,7 +4,7 @@ import Header from "./header";
 import { connect } from "react-redux";
 import { authMe, logout } from "../../../redux/auth-reducer";
 
-class HeaderContainer extends React.Component {
+class HeaderContainer extends React.PureComponent {
   render() {
     return <Header {...this.props} />;
   }

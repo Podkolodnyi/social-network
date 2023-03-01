@@ -43,7 +43,7 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
 
-const Login = (props) => {
+const Login = React.memo((props) => {
   const onSubmit = (formData) => {
     props.login(formData.email, formData.password, formData.rememberMe);
   };
@@ -57,7 +57,7 @@ const Login = (props) => {
       <LoginReduxForm onSubmit={onSubmit} />
     </div>
   );
-};
+});
 const mapStateToProps = (state) => {
   return { isAuth: state.auth.isAuth, loginError: state.auth.loginError };
 };

@@ -2,7 +2,7 @@ import Sidebar from "./sidebar";
 import React from "react";
 import { connect } from "react-redux";
 
-class SidebarContainer extends React.Component {
+class SidebarContainer extends React.PureComponent {
   render() {
     return <Sidebar {...this.props} />;
   }
